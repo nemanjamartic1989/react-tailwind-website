@@ -1,8 +1,20 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {assets} from '../assets/assets'
 
 const Navbar = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+    useEffect(() => {
+        if (showMobileMenu) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.auto = 'auto';
+        }
+
+        return () => {
+            document.body.style.auto = 'auto';
+        }
+    }, [showMobileMenu])
 
     return (
         <div className='absolute top-0 left-0 w-full z-10'>
@@ -32,16 +44,16 @@ const Navbar = () => {
                     <img onClick={() => setShowMobileMenu(false)} src={assets.cross_icon} className='w-6' alt=""/>
                 </div>
                 <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
-                    <a href="#Header" className='px-4 py2 rounded-full inline-block'>
+                    <a href="#Header" onClick={() => setShowMobileMenu(false)} className='px-4 py2 rounded-full inline-block'>
                         Home
                     </a>
-                    <a href="#About" className='px-4 py2 rounded-full inline-block'>
+                    <a href="#About" onClick={() => setShowMobileMenu(false)} className='px-4 py2 rounded-full inline-block'>
                         About
                     </a>
-                    <a href="#Projects" className='px-4 py2 rounded-full inline-block'>
+                    <a href="#Projects" onClick={() => setShowMobileMenu(false)} className='px-4 py2 rounded-full inline-block'>
                         Projects
                     </a>
-                    <a href="#Testimonials" className='px-4 py2 rounded-full inline-block'>
+                    <a href="#Testimonials" onClick={() => setShowMobileMenu(false)} className='px-4 py2 rounded-full inline-block'>
                         Testimonials
                     </a>
                 </ul>
